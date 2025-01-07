@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タブ機能</title>
+    <style>
+        /* 全体のスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* タブのボタン */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .tabs button.active {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        /* コンテンツのスタイル */
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            /*background-color: #f1f1f1;
+            border-radius: 0; /* 角丸をフラットに変更 */
+            /*border: 1px solid #ccc; /* フラットなボーダーを追加 */
+            box-shadow: none; /* 影を削除 */
+        }
+
+        .tabcontent.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>ポートフォリオ</h1>
+
+    <!-- タブボタン -->
+    <div class="tabs">
+        <button class="tablinks active" onclick="openTab(event, 'Profile')">プロフィール</button>
+        <button class="tablinks" onclick="openTab(event, 'Content')">コンテンツ</button>
+        <button class="tablinks" onclick="openTab(event, 'Free')">連絡先</button>
+    </div>
+
+    <!-- タブコンテンツ -->
+
+    <div id="Content" class="tabcontent">
+        {% include "myapp/content.html" %}
+    </div>
+
+    <div id="Profile" class="tabcontent active">
+        {% include "myapp/profile.html" %}
+    </div>
+
+    <div id="Free" class="tabcontent">
+        {% include "myapp/free.html" %}
+    </div>
+
+    <script>
+        // タブの切り替えスクリプト
+        function openTab(event, tabId) {
+            // 全てのタブコンテンツを非表示
+            var contents = document.getElementsByClassName('tabcontent');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+
+            // 全てのタブボタンのアクティブ状態を解除
+            var links = document.getElementsByClassName('tablinks');
+            for (var i = 0; i < links.length; i++) {
+                links[i].classList.remove('active');
+            }
+
+            // クリックされたタブコンテンツを表示
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
